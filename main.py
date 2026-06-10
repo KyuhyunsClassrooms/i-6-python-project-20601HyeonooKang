@@ -26,3 +26,20 @@ class Character:
         damage = self.skills[skill_idx][1]
         speed = self.skills[skill_idx][2]
 
+
+
+
+
+
+
+
+
+
+
+
+
+alli = int(input())
+for 
+
+
+charlist = []
