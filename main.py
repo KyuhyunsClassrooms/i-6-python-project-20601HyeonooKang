@@ -1,101 +1,28 @@
 # AI 활용 자유 주제 파이썬 미니 프로젝트
 # 이름 또는 학번: 
 # 프로젝트 주제: 
+class Character:
+    def __init__(self, name, max_hp, skill1_name, skill1_dmg, skill1_speed, skill2_name, skill2_dmg, skill2_speed):
+        # 💡 보낸 데이터들을 2차원 리스트 형태로 묶어서 저장합니다!
+        self.skills = [
+            [name,max_hp,max_hp],
+            [skill1_name, skill1_dmg, skill1_speed],
+            [skill2_name, skill2_dmg, skill2_speed] 
+        ]
 
-# ============================================================
-# 사용 안내
-# ------------------------------------------------------------
-# 이 파일은 예시 골격입니다.
-# 그대로 제출하지 말고, 반드시 자신의 주제에 맞게 수정하세요.
-#
-# 필수 조건
-# 1. 2차원 리스트 사용
-# 2. 함수 2개 이상, 가능하면 3개 이상 분리
-# 3. 조건문 사용
-# 4. 반복문 사용
-# 5. 실행 결과 출력
-# ============================================================
+    # 캐릭터의 정보를 보여주는 함수
+    def show_info(self):
+        print(f"=== [{self.skills[0][0]}] 상태창 ===")
+        print(f"체력: {self.skills[0][1]}/{self.skills[0][2]}")
+        # 2차원 리스트에서 데이터를 꺼내서 출력하기
+        print(f"기술 1: {self.skills[1][0]} (데미지: {self.skills[1][1]}, 속도: {self.skills[1][2]})")
+        print(f"기술 2: {self.skills[2][0]} (데미지: {self.skills[2][1]}, 속도: {self.skills[2][2]})")
+        print("========================")
 
+    def attack(self, skill_idx, target):
+        # skill_idx에는 1(공격1) 또는 2(공격2)이 들어옵니다.
+        # 2차원 리스트(self.skills)에서 스킬 이름과 데미지를 꺼내보세요.
+        skill_name = self.skills[skill_idx][0]
+        damage = self.skills[skill_idx][1]
+        speed = self.skills[skill_idx][2]
 
-# ------------------------------------------------------------
-# 1. 데이터 준비: 2차원 리스트
-# ------------------------------------------------------------
-# 아래 예시는 "활동 추천 프로그램"입니다.
-# 자신의 주제에 맞게 data를 만드세요.
-#
-# 현재 열의 의미:
-# 0번 열: 활동 이름
-# 1번 열: 필요한 시간(분)
-# 2번 열: 추천 기분
-# 3번 열: 활동 유형
-# ------------------------------------------------------------
-
-activities = [
-    ["산책하기", 30, "피곤", "운동"],
-    ["짧은 낮잠", 20, "피곤", "휴식"],
-    ["좋아하는 음악 듣기", 10, "우울", "휴식"],
-    ["문제집 3쪽 풀기", 40, "차분", "공부"],
-    ["방 정리하기", 25, "답답", "생활"],
-    ["친구에게 연락하기", 15, "우울", "소통"],
-]
-
-
-# ------------------------------------------------------------
-# 2. 함수 정의
-# ------------------------------------------------------------
-
-def show_intro():
-    """프로그램 제목과 안내를 출력한다."""
-    print("=" * 40)
-    print("AI 활용 자유 주제 파이썬 미니 프로젝트")
-    print("예시: 기분과 시간에 따른 활동 추천기")
-    print("=" * 40)
-
-
-def get_user_input():
-    """사용자에게 기분과 남은 시간을 입력받는다."""
-    mood = input("현재 기분을 입력하세요. 예: 피곤, 우울, 차분, 답답: ")
-    minutes = int(input("사용 가능한 시간을 분 단위로 입력하세요: "))
-    return mood, minutes
-
-
-def find_recommendations(data, mood, minutes):
-    """2차원 리스트를 반복하며 조건에 맞는 활동을 찾는다."""
-    results = []
-
-    for row in data:
-        name = row[0]
-        required_minutes = row[1]
-        recommended_mood = row[2]
-        activity_type = row[3]
-
-        # 조건문: 사용자의 기분과 시간이 활동 조건에 맞는지 판단한다.
-        if recommended_mood == mood and required_minutes <= minutes:
-            results.append([name, required_minutes, activity_type])
-
-    return results
-
-
-def print_result(results):
-    """추천 결과를 출력한다."""
-    print("\n[추천 결과]")
-
-    if len(results) == 0:
-        print("조건에 맞는 활동이 없습니다.")
-        print("시간을 늘리거나 다른 기분을 입력해 보세요.")
-    else:
-        for item in results:
-            print(f"- {item[0]} / {item[1]}분 / 유형: {item[2]}")
-
-
-def main():
-    show_intro()
-    mood, minutes = get_user_input()
-    results = find_recommendations(activities, mood, minutes)
-    print_result(results)
-
-
-# ------------------------------------------------------------
-# 3. 프로그램 실행
-# ------------------------------------------------------------
-main()
